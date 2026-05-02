@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 
 const categories = [
-  { label: "Underweight", min: 0, max: 18.5, color: "#60A5FA" },
-  { label: "Normal Weight", min: 18.5, max: 24.9, color: "#34D399" },
-  { label: "Overweight", min: 24.9, max: 29.9, color: "#FBBF24" },
-  { label: "Obese", min: 29.9, max: 34.9, color: "#FB923C" },
-  { label: "Severely Obese", min: 34.9, max: 39.9, color: "#F87171" },
-  { label: "Morbidly Obese", min: 39.9, max: 50, color: "#EF4444" },
+  { label: "Underweight", min: 10, max: 18.5, color: "#60A5FA" },
+  { label: "Normal Weight", min: 18.5, max: 25, color: "#34D399" },
+  { label: "Overweight", min: 25, max: 30, color: "#FBBF24" },
+  { label: "Obese", min: 30, max: 35, color: "#FB923C" },
+  { label: "Severely Obese", min: 35, max: 40, color: "#F87171" },
+  { label: "Morbidly Obese", min: 40, max: 50, color: "#EF4444" },
 ];
 
 interface BmiGaugeProps {

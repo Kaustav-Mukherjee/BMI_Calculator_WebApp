@@ -7,10 +7,10 @@ interface HealthRecommendationsProps {
 
 const getCategory = (bmi: number) => {
   if (bmi < 18.5) return { label: "Underweight", risk: "Minimal", color: "text-blue-500" };
-  if (bmi < 24.9) return { label: "Normal Weight", risk: "Minimal", color: "text-emerald-500" };
-  if (bmi < 29.9) return { label: "Overweight", risk: "Increased", color: "text-yellow-500" };
-  if (bmi < 34.9) return { label: "Obese", risk: "High", color: "text-orange-500" };
-  if (bmi < 39.9) return { label: "Severely Obese", risk: "Very High", color: "text-red-400" };
+  if (bmi < 25) return { label: "Normal Weight", risk: "Minimal", color: "text-emerald-500" };
+  if (bmi < 30) return { label: "Overweight", risk: "Increased", color: "text-yellow-500" };
+  if (bmi < 35) return { label: "Obese", risk: "High", color: "text-orange-500" };
+  if (bmi < 40) return { label: "Severely Obese", risk: "Very High", color: "text-red-400" };
   return { label: "Morbidly Obese", risk: "Extremely High", color: "text-red-600" };
 };
 
