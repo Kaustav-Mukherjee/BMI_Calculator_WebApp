@@ -1,16 +1,125 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import BmiGauge from "@/components/BmiGauge";
+import HealthRecommendations from "@/components/HealthRecommendations";
+import { Calculator } from "lucide-react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [name, setName] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [result, setResult] = useState<{ bmi: number; name: string } | null>(null);
+
+  const handleCalculate = () => {
+    const w = parseFloat(weight);
+    const h = parseFloat(height);
+    if (!name.trim() || isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return;
+    const bmi = (w * 703) / (h * h);
+    setResult({ bmi, name: name.trim() });
+  };
+
+  const handleReset = () => {
+    setName("");
+    setWeight("");
+    setHeight("");
+    setResult(null);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-6">
+        {/* Header */}
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-2">
+            <Calculator className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">BMI Calculator</h1>
+          <p className="text-sm text-muted-foreground">
+            Calculate your Body Mass Index and get personalized health tips.
+          </p>
+        </div>
+
+        {/* Form */}
+        <Card className="rounded-2xl shadow-sm border">
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="rounded-xl h-11"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="weight" className="text-sm font-medium">Weight (lbs)</Label>
+                <Input
+                  id="weight"
+                  type="number"
+                  placeholder="e.g. 154"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                  className="rounded-xl h-11"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="height" className="text-sm font-medium">Height (in)</Label>
+                <Input
+                  id="height"
+                  type="number"
+                  placeholder="e.g. 69"
+                  value={height}
+                  onChange={(e) => setHeight(e.target.value)}
+                  className="rounded-xl h-11"
+                />
+              </div>
+            </div>
+            <Button onClick={handleCalculate} className="w-full rounded-xl h-11 text-sm font-medium">
+              Calculate BMI
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Results */}
+        {result && (
+          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* BMI Score */}
+            <Card className="rounded-2xl shadow-sm border">
+              <CardContent className="p-6 text-center space-y-1">
+                <p className="text-sm text-muted-foreground">Your BMI</p>
+                <p className="text-5xl font-bold tracking-tight text-foreground">
+                  {result.bmi.toFixed(1)}
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Gauge */}
+            <Card className="rounded-2xl shadow-sm border">
+              <CardContent className="p-6">
+                <BmiGauge bmi={result.bmi} />
+              </CardContent>
+            </Card>
+
+            {/* Recommendations */}
+            <Card className="rounded-2xl shadow-sm border">
+              <CardContent className="p-6">
+                <HealthRecommendations bmi={result.bmi} name={result.name} />
+              </CardContent>
+            </Card>
+
+            <Button variant="outline" onClick={handleReset} className="w-full rounded-xl h-11 text-sm">
+              Calculate Again
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
