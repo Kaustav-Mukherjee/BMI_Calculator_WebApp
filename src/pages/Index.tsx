@@ -47,10 +47,10 @@ const Index = () => {
   const showResults = phase === "results" || (phase === "morphing" && !!result);
 
   const bmiCategory = result
-    ? result.bmi < 18.5 ? "Underweight" : result.bmi < 25 ? "Normal Weight" : result.bmi < 30 ? "Overweight" : result.bmi < 35 ? "Obese" : result.bmi < 40 ? "Severely Obese" : "Morbidly Obese"
+    ? result.bmi < 18.5 ? "Underweight" : result.bmi < 24.9 ? "Normal Weight" : result.bmi < 29.9 ? "Overweight" : result.bmi < 34.9 ? "Obese" : result.bmi < 39.9 ? "Severely Obese" : "Morbidly Obese"
     : "";
   const bmiColor = result
-    ? result.bmi < 18.5 ? "text-blue-500" : result.bmi < 25 ? "text-emerald-500" : result.bmi < 30 ? "text-yellow-500" : result.bmi < 35 ? "text-orange-500" : result.bmi < 40 ? "text-red-400" : "text-red-600"
+    ? result.bmi < 18.5 ? "text-blue-500" : result.bmi < 24.9 ? "text-emerald-500" : result.bmi < 29.9 ? "text-yellow-500" : result.bmi < 34.9 ? "text-orange-500" : result.bmi < 39.9 ? "text-red-400" : "text-red-600"
     : "";
 
   return (
